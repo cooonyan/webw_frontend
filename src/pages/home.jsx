@@ -27,6 +27,7 @@ function Home() {
       ) : (
         <div>
           <h1>Guest 상태</h1>
+          <button onClick={() => navigate('/register')}>회원가입</button>
           <button onClick={() => navigate('/loginform')}>로그인 하기</button>
         </div>
       )}

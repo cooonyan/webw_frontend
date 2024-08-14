@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>명함 편집 페이지</title>
+    <link rel="stylesheet" href="edit.css">
+</head>
+<body>
+    <div class="edit_page">
+        <!-- 명함 편집 제목 -->
+        <h1>명함 편집</h1>
+        
+        <!-- 제목 아래의 검정색 선 -->
+        <hr class="title-divider">
+
+        <form name="set_intro">                <!--편집창의 요소들-->
+            <div>                               <!--이름 편집-->
+                <input id="name" placeholder="이름">
+            </div>
+            <div>                               <!--직업 편집-->      
+                <input id="job" placeholder="직업">
+            </div>
+            <div>                               <!--자기 소개--> 
+                <input id="introduce" placeholder="자신을 소개해 보세요.">
+            </div>
+        </form>
+        <form name="set_link">                 <!--SNS 링크 연결 요소들--> 
+            <div id="table_container">
+                <table class="link_table">
+                    <tr>
+                        <td rowspan="2">
+                            <select>
+                                <option>인스타그램</option>
+                                <option>블로그</option>
+                                <option>유튜브</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input name="link_input" placeholder="링크">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input name="link_explain" placeholder="링크 이름">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <input type="button" value="+" onclick="add_link()">
+        </form>
+        <form>                                      <!--메모 입력 요소--> 
+            <input id="memo" placeholder="메모를 적어주세요.">
+        </form>
+        <input type="button" value="편집 완료">      <!--편집 완료 버튼--> 
+    </div>
+
+    <script>
+        // 링크 테이블 전체를 추가하는 함수
+        function add_link() {
+            //링크 테이블 복사
+            var tableContainer = document.getElementById('table_container');
+            var originalTable = document.querySelector('.link_table');
+            var newTable = originalTable.cloneNode(true); // 깊은 복사 수행
+
+            // 복사된 table 요소를 컨테이너에 추가(appendChild)
+            tableContainer.appendChild(newTable);
+        }
+    </script>
+</body>
+</html>

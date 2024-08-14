@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from "../style/loginform.module.css"
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -30,17 +31,32 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Username:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+      <form onSubmit={handleSubmit} className={styles.login_container}>
+        <h1>로그인</h1>
+        <div className={styles.input_group}>
+          <label htmlFor="email">이메일 주소</label>
+          <input
+              type="text"
+              id="email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className={styles.input_group}>
+          <label htmlFor="password">비밀번호</label>
+          <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit" className={styles.button_group}>로그인</button>
+        <div className={styles.extra_links}>
+          <a href="/forgot-password" onClick={() => navigate('/forgot-password')}>비밀번호를 잊으셨나요?</a>
+          <a href="/register" onClick={() => navigate('/register')}>회원가입</a>
+        </div>
+      </form>
   );
 }
 
