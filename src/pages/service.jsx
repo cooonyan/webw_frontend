@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import styles from '../style/service.module.css';
-import center_photo from '../img/home.png';
-import logo from '../img/logo.jpg';
+import styles from '../style/plus.module.css';
+import profile from '../img/profile.jpg';
+import instalogo from '../img/instagram.jpg';
+import naverlogo from '../img/naverblog.png';
+import youtubelogo from '../img/youtube.jpg';
+
+
 
 const ServicePage = () => {
     const [serviceData, setServiceData] = useState(null);
@@ -44,53 +48,56 @@ const ServicePage = () => {
     }
 
     return (
-        <div class="all_page">
-            <div class="display">
-                <div class="background">
-                    <div class="clarity"></div>
-                    <div class="logout">로그아웃</div>
+        <div className={styles.all_page}>
+            <div className={styles.display}>
+                <div className={styles.background}>
+                    <div className={styles.clarity}></div>
+                    <div className={styles.logout}>로그아웃</div>
                 </div>
-                <div class="blog_head">
-                    <div class="head_title">
-                        <a class="link_name" href="/" style="text-decoration: none; color: white;">USER'S STORY</a>
+                <div className={styles.blog_head}>
+                    <div className={styles.head_title}>
+                        <a className={styles.link_name} href="/" style={{textDecoration: 'none', color: 'white'}}>USER'S
+                            STORY</a>
                     </div>
-                    <div class="profile">
-                        <img src="profile.jpg" />
-                            <div class="profile_name">NAME</div>
-                            <div class="profile_job">JOB</div>
-                            <div class="one_line">One line introduction</div>
+                    <div className={styles.profile}>
+                        <img src={profile} alt="Profile"/>
+                        <div className={styles.profile_name}>NAME</div>
+                        <div className={styles.profile_job}>JOB</div>
+                        <div className={styles.one_line}>One line introduction</div>
                     </div>
                 </div>
-                <div class="content_boxes">
-                    <a href="https://www.instagram.com/" class="content_box" target="_blank">
-                        <img src="instagram.jpg" class="box_icon" alt="Icon 1" />
-                            <div class="box_content">
-                                <div class="box_title">user instagram</div>
-                                <div class="box_subtitle">one line introduction</div>
-                            </div>
-
+                <div className={styles.content_boxes}>
+                    <a href="https://www.instagram.com/" className={styles.content_box} target="_blank"
+                       rel="noopener noreferrer">
+                        <img src={instalogo} className={styles.box_icon} alt="Icon 1"/>
+                        <div className={styles.box_content}>
+                            <div className={styles.box_title}>user instagram</div>
+                            <div className={styles.box_subtitle}>one line introduction</div>
+                        </div>
                     </a>
 
-                    <a href="https://section.blog.naver.com/BlogHome.nhn" class="content_box" target="_blank">
-                        <img src="naverblog.png" class="box_icon" alt="Icon 2" />
-                            <div class="box_content">
-                                <div class="box_title">user blog</div>
-                                <div class="box_subtitle">one line introduction</div>
-                            </div>
+                    <a href="https://section.blog.naver.com/BlogHome.nhn" className={styles.content_box} target="_blank"
+                       rel="noopener noreferrer">
+                        <img src={naverlogo} className={styles.box_icon} alt="Icon 2"/>
+                        <div className={styles.box_content}>
+                            <div className={styles.box_title}>user blog</div>
+                            <div className={styles.box_subtitle}>one line introduction</div>
+                        </div>
                     </a>
 
-                    <a href="https://www.youtube.com/" class="content_box" target="_blank">
-                        <img src="youtube.jpg" class="box_icon" alt="Icon 3" />
-                            <div class="box_content">
-                                <div class="box_title">youtube</div>
-                                <div class="box_subtitle">one line introduction</div>
-                            </div>
+                    <a href="https://www.youtube.com/" className={styles.content_box} target="_blank"
+                       rel="noopener noreferrer">
+                        <img src={youtubelogo} className={styles.box_icon} alt="Icon 3"/>
+                        <div className={styles.box_content}>
+                            <div className={styles.box_title}>youtube</div>
+                            <div className={styles.box_subtitle}>one line introduction</div>
+                        </div>
                     </a>
 
-                    <div class="content_box memo_box">
-                        <div class="box_content">
-                            <div class="box_title">Memo</div>
-                            <textarea class="memo_area" placeholder=""></textarea>
+                    <div className={`${styles.content_box} ${styles.memo_box}`}>
+                        <div className={styles.box_content}>
+                            <div className={styles.box_title}>Memo</div>
+                            <textarea className={styles.memo_area} placeholder=""></textarea>
                         </div>
                     </div>
                 </div>
