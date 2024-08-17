@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styles from '../style/plus.module.css';
 import profile from '../img/profile.jpg';
@@ -10,6 +10,7 @@ import youtubelogo from '../img/youtube.jpg';
 
 
 const ServicePage = () => {
+    const navigate = useNavigate();
     const [serviceData, setServiceData] = useState(null);
     const [error, setError] = useState(false);
     const location = useLocation().pathname.substring(1);
@@ -38,7 +39,7 @@ const ServicePage = () => {
         return (
             <div>
                 <h1>404 Not Found</h1>
-                <button onClick={() => window.location.reload()}>재시도</button>
+                <button onClick={() => navigate('/')}>홈으로 돌아가기</button>
             </div>
         );
     }
@@ -46,6 +47,7 @@ const ServicePage = () => {
     if (!serviceData) {
         return <div>Loading...</div>; // 로딩 스피너 추가 가능
     }
+
 
     return (
         <div className={styles.all_page}>
@@ -56,12 +58,12 @@ const ServicePage = () => {
                 </div>
                 <div className={styles.blog_head}>
                     <div className={styles.head_title}>
-                        <a className={styles.link_name} href="/" style={{textDecoration: 'none', color: 'white'}}>USER'S
+                        <a className={styles.link_name} href="/" style={{textDecoration: 'none', color: 'white'}}>{serviceData.service_name}'S
                             STORY</a>
                     </div>
                     <div className={styles.profile}>
                         <img src={profile} alt="Profile"/>
-                        <div className={styles.profile_name}>NAME</div>
+                        <div className={styles.profile_name}>{serviceData.service_name}</div>
                         <div className={styles.profile_job}>JOB</div>
                         <div className={styles.one_line}>One line introduction</div>
                     </div>

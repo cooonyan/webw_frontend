@@ -30,7 +30,9 @@ function LoginForm() {
     }
   };
 
+
   return (
+      <div className={styles.all_page}>
       <form onSubmit={handleSubmit} className={styles.login_container}>
         <h1>로그인</h1>
         <div className={styles.input_group}>
@@ -57,6 +59,7 @@ function LoginForm() {
           <a href="/register" onClick={() => navigate('/register')}>회원가입</a>
         </div>
       </form>
+      </div>
   );
 }
 

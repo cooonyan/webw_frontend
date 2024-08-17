@@ -38,7 +38,7 @@ h1 {
     z-index: 1; 
 }
 
-.title-divider {
+.title_divider {
     border: 0;
     height: 2px;
     background-color: black;
@@ -69,7 +69,7 @@ input[type="button"]:hover {
     background-color: rgb(148, 148, 249);
 }
 
-.table-container {
+.table_container {
     display: flex;
     justify-content: center;
 }
