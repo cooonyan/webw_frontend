@@ -151,7 +151,7 @@ const EditServiceStatus = () => {
                   <input type="text" name="service_name" value={updatedServiceData.service_name} onChange={handleInputChange} placeholder="이름"/>
                 </div>
                 <div>
-                  <input type="text" name="url" value={updatedServiceData.service_url} onChange={handleInputChange} placeholder="URL"/>
+                  <input type="text" name="service_url" value={updatedServiceData.service_url} onChange={handleInputChange} placeholder="URL"/>
                 </div>
                 <div>
                   <input type="text" name="service_label" value={updatedServiceData.service_label} onChange={handleInputChange} placeholder="자신을 소개해 보세요."/>
