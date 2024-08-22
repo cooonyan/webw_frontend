@@ -1,6 +1,6 @@
 .all_page{
     font-family: Arial, sans-serif;
-    background-color: #ffffff; /* 바탕색을 흰색으로 변경 */
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;

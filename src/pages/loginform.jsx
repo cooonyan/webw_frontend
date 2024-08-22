@@ -26,7 +26,7 @@ function LoginForm() {
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
+      alert('내부 에러');
     }
   };
 
@@ -36,7 +36,7 @@ function LoginForm() {
       <form onSubmit={handleSubmit} className={styles.login_container}>
         <h1>로그인</h1>
         <div className={styles.input_group}>
-          <label htmlFor="email">이메일 주소</label>
+          <label htmlFor="email">아이디</label>
           <input
               type="text"
               id="email"
@@ -55,7 +55,6 @@ function LoginForm() {
         </div>
         <button type="submit" className={styles.button_group}>로그인</button>
         <div className={styles.extra_links}>
-          <a href="/forgot-password" onClick={() => navigate('/forgot-password')}>비밀번호를 잊으셨나요?</a>
           <a href="/register" onClick={() => navigate('/register')}>회원가입</a>
         </div>
       </form>

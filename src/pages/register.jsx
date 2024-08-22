@@ -1,84 +1,24 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
-// import "../style/global.css";
-// import "../style/register.css";
-//
-//
-// const RegisterPage = () => {
-//   const [username, setUsername] = useState('');
-//   const [privateToken, setPrivateToken] = useState('');
-//   const [error, setError] = useState(null);
-//   const [success, setSuccess] = useState(false);
-//
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//
-//     try {
-//       const response = await axios.post('http://localhost:5000/register', {
-//         username,
-//         private_token: privateToken,
-//       });
-//
-//       const { status, message } = response.data;
-//
-//       if (status === 'success') {
-//         setSuccess(true);
-//         setError(null);
-//       } else {
-//         setError(message);
-//         setSuccess(false);
-//       }
-//     } catch (error) {
-//       setError('회원가입에 실패했습니다. 다시 시도해 주세요.');
-//       console.log(error);
-//       setSuccess(false);
-//     }
-//   };
-//
-//   return (
-//     <div>
-//       <h1>회원가입</h1>
-//       <p>어쭈구 서비스에 오신 걸 환영합니다.</p>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label>
-//             아이디<br/>
-//             <input
-//               type="text"
-//               value={username}
-//               onChange={(e) => setUsername(e.target.value)}
-//             />
-//           </label><br/>
-//           <label>
-//             비밀번호<br/>
-//             <input
-//               type="password"
-//               value={privateToken}
-//               onChange={(e) => setPrivateToken(e.target.value)}
-//             />
-//           </label><br/>
-//         </div>
-//         <button type="submit">회원가입</button>
-//       </form>
-//
-//       {error && <div>{error}</div>}
-//       {success && <div>회원가입이 완료되었습니다.</div>}
-//     </div>
-//   );
-// };
-//
-// export default RegisterPage;
-//
-
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
+import styles from "../style/loginform.module.css";
+import {useNavigate} from "react-router-dom";
 
 const RegisterPage = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [privateToken, setPrivateToken] = useState('');
+    const [verifyPrivateToken, setverifyToken] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!username.trim() || !privateToken.trim()) {
+            alert('아이디와 비밀번호를 모두 입력해주세요.');
+            return;
+        }
+        if (privateToken !== verifyPrivateToken) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
 
         try {
             const response = await axios.post('http://localhost:5000/register', {
@@ -86,60 +26,72 @@ const RegisterPage = () => {
                 private_token: privateToken,
             });
 
-            // HTTP 응답 코드에 따라 알림창 표시
+
             if (response.status === 200) {
-                const { status, message } = response.data;
+                const {status, message} = response.data;
                 if (status === 'success') {
-                    alert('회원가입이 완료되었습니다.'); // 성공 시 알림창 표시
+                    alert('회원가입이 완료되었습니다.');
+                    navigate('/loginform');
                 } else {
-                    alert(message); // 실패 시 서버에서 반환된 메시지 표시
+                    alert(message);
                 }
             } else {
-                alert('알 수 없는 오류가 발생했습니다.'); // 기타 오류 처리
+                alert('알 수 없는 오류가 발생했습니다.');
             }
 
         } catch (error) {
-            // 네트워크 오류 또는 기타 예외 처리
-            if (error.response) { // 서버가 응답했지만 오류가 발생한 경우
+            if (error.response) {
                 if (error.response.status === 400)
-                    alert('이미 존재하는 아이디입니다. 다른 아이디로 다시 시도하시오'); // 서버에서 반환한 오류 메시지 표시
-                else{
-                    alert(`오류 발생: ${error.response.status}. ${error.response.data.message}`); // 서버의 오류 메시지 표시
+                    alert('이미 존재하는 아이디입니다. 다른 아이디로 다시 시도하시오');
+                else {
+                    alert(`오류 발생: ${error.response.status}. ${error.response.data.message}`);
                 }
             } else {
-                alert('서버와의 연결 문제로 회원가입에 실패했습니다. 인터넷 연결을 확인하고 나중에 다시 시도해 주세요.'); // 네트워크 오류 처리
+                alert('서버와의 연결 문제로 회원가입에 실패했습니다. 인터넷 연결을 확인하고 나중에 다시 시도해 주세요.');
             }
             console.log(error);
         }
     };
-
     return (
-        <div>
-            <h1>회원가입</h1>
-            <p>어쭈구 서비스에 오신 걸 환영합니다.</p>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        아이디<br/>
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </label><br/>
-                    <label>
-                        비밀번호<br/>
-                        <input
-                            type="password"
-                            value={privateToken}
-                            onChange={(e) => setPrivateToken(e.target.value)}
-                        />
-                    </label><br/>
+        <div className={styles.all_page}>
+            <form onSubmit={handleSubmit} className={styles.login_container}>
+                <h1>회원가입</h1>
+                <div className={styles.input_group}>
+                    <label htmlFor="email">아이디</label>
+                    <input
+                        type="text"
+                        id="email"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
                 </div>
-                <button type="submit">회원가입</button>
+                <div className={styles.input_group}>
+                    <label htmlFor="password">비밀번호</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={privateToken}
+                        onChange={(e) => setPrivateToken(e.target.value)}
+                    />
+                </div>
+                <div className={styles.input_group}>
+                    <label htmlFor="password">비밀번호 확인</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={verifyPrivateToken}
+                        onChange={(e) => setverifyToken(e.target.value)}
+                    />
+                </div>
+                <button type="submit" className={styles.button_group}>회원가입</button>
+                <div className={styles.extra_links}>
+                    <a onClick={() => navigate('/loginform')} href="/loginform">로그인</a>
+                </div>
             </form>
         </div>
+
     );
 };
 
 export default RegisterPage;
+
